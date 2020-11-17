@@ -35,6 +35,9 @@ class PunkapiApplicationTests {
 	@MockBean
 	private BeerRepository beerRepository;
 
+	@MockBean
+	private UserBeerRepository userBeerRepository;
+
 	@BeforeEach
 	void init() {
 		List<Beer> beers = new ArrayList<>();
@@ -48,7 +51,7 @@ class PunkapiApplicationTests {
 	
 	@Test
 	void testLoadBeers() throws Exception {
-		this.mockMvc.perform(get("/beers/page")).andDo(print())
+		this.mockMvc.perform(get("/beers")).andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
 				.andExpect(jsonPath("$.content", hasSize(2)))
